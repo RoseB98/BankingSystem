@@ -2,7 +2,9 @@ package com.example.BankingSystem.controllers.Account;
 
 import com.example.BankingSystem.models.Account.Account;
 import com.example.BankingSystem.models.Account.Checking;
+import com.example.BankingSystem.models.CheckingDTO;
 import com.example.BankingSystem.repositories.CheckingRepository;
+import com.example.BankingSystem.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +18,13 @@ public class CheckingController {
 
     @Autowired
     CheckingRepository checkingRepository;
+    @Autowired
+    AdminService adminService;
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Checking createCheckingAccount(){
+    public Account createCheckingAccount(CheckingDTO checkingDTO){
 
-        return null;
+        return adminService.createCheckingAccount(checkingDTO);
     }
 }

@@ -27,11 +27,10 @@ public abstract class Account {
     }
 
     public Account(BigDecimal balance, AccountHolder primaryOwner,
-                   AccountHolder secondaryOwner, BigDecimal penaltyFee) {
+                   AccountHolder secondaryOwner) {
         this.balance = balance;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
-        this.penaltyFee = penaltyFee;
     }
 
     public Long getAccountNumber() {

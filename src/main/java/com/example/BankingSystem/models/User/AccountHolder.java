@@ -18,8 +18,6 @@ import java.util.List;
 @Entity
 public class AccountHolder extends User {
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dateOfBirth;
 
     @Embedded
@@ -44,8 +42,6 @@ public class AccountHolder extends User {
 
     public AccountHolder() {
     }
-
-
 
     public AccountHolder(String name, String email, String password, LocalDate dateOfBirth, Address primaryAddress, Address mailingAddress) {
         super(name, email, password);

@@ -21,7 +21,7 @@ public class BankingSystemApplication implements CommandLineRunner {
 	AccountHolderRepository accountHolderRepository;
 
 	@Autowired
-
+    UserRepository userRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BankingSystemApplication.class, args);
@@ -39,8 +39,8 @@ public class BankingSystemApplication implements CommandLineRunner {
 				Address mailingAddress2 = new Address("Delta", "1-15",null, PlaceType.HOUSE, "Barquisimeto", "9103");
 
 
-		AccountHolder accountHolder1 = new AccountHolder("Pablito", "pablito@gmail.com", "12345", date1, address1, mailingAddress1);
-		AccountHolder accountHolder2 = new AccountHolder("Darci", "darci@gamil.com", "54321", LocalDate.of(1979, 03, 19), address2, mailingAddress2);
-		accountHolderRepository.saveAll(List.of(accountHolder1, accountHolder2));
+		User accountHolder1 = new AccountHolder("Pablito", "pablito@gmail.com", "12345", date1, address1, mailingAddress1);
+		User accountHolder2 = new AccountHolder("Darci", "darci@gamil.com", "54321", LocalDate.of(1979, 03, 19), address2, mailingAddress2);
+		userRepository.saveAll(List.of(accountHolder1, accountHolder2));
 	}
 }

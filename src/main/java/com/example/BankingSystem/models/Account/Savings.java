@@ -15,18 +15,14 @@ public class Savings extends Account {
     private String secretKey;
     @Min(value = 100)
     private BigDecimal minimunBalance = new BigDecimal(1000);
-    private Status status;
+    private Status status = Status.ACTIVE;
 
     public Savings() {
     }
 
-    public Savings(BigDecimal balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, BigDecimal penaltyFee,
-                   BigDecimal interestRate, String secretKey, BigDecimal minimunBalance, Status status) {
-        super(balance, primaryOwner, secondaryOwner, penaltyFee);
-        this.interestRate = interestRate;
+    public Savings(BigDecimal balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey) {
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
-        this.minimunBalance = minimunBalance;
-        this.status = status;
     }
 
     public BigDecimal getInterestRate() {

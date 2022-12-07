@@ -11,18 +11,14 @@ public class Checking extends Account {
     private BigDecimal minimumBalance = new BigDecimal(250);
     private BigDecimal monthlyMaintenanceFee = new BigDecimal(12);
     private String secretKey;
-    private Status status;
+    private Status status = Status.ACTIVE;
 
     public Checking() {
     }
 
-    public Checking(BigDecimal balance, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                    BigDecimal penaltyFee, BigDecimal minimumBalance, BigDecimal monthlyMaintenanceFee, String secretKey, Status status) {
-        super(balance, primaryOwner, secondaryOwner, penaltyFee);
-        this.minimumBalance = minimumBalance;
-        this.monthlyMaintenanceFee = monthlyMaintenanceFee;
+    public Checking(BigDecimal balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey) {
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
-        this.status = status;
     }
 
     public BigDecimal getMinimumBalance() {

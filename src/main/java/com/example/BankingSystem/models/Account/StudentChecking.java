@@ -9,17 +9,14 @@ import java.math.BigDecimal;
 public class StudentChecking extends Account {
 
     private String secretKey;
-    private Status status;
+    private Status status = Status.ACTIVE;
 
     public StudentChecking() {
-
     }
 
-    public StudentChecking(BigDecimal balance, AccountHolder primaryOwner,
-                           AccountHolder secondaryOwner, BigDecimal penaltyFee, String secretKey, Status status) {
-        super(balance, primaryOwner, secondaryOwner, penaltyFee);
+    public StudentChecking(BigDecimal balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey) {
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
-        this.status = status;
     }
 
     public String getSecretKey() {
