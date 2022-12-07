@@ -3,6 +3,7 @@ package com.example.BankingSystem.controllers;
 import com.example.BankingSystem.DTOs.CheckingDTO;
 import com.example.BankingSystem.DTOs.UpdateBalanceDTO;
 import com.example.BankingSystem.models.Account.Account;
+import com.example.BankingSystem.models.Account.CreditCard;
 import com.example.BankingSystem.models.User.AccountHolder;
 import com.example.BankingSystem.models.User.Admin;
 import com.example.BankingSystem.repositories.CheckingRepository;
@@ -43,5 +44,11 @@ public class AdminController {
     @PatchMapping("/update-balance")
     public Account updateBalance(UpdateBalanceDTO updateBalanceDTO){
        return adminService.updateBalance(updateBalanceDTO);
+    }
+
+    @PostMapping("/create-credit-card")
+    @ResponseStatus(HttpStatus.CREATED)
+    public CreditCard addCreditCard(CreditCard creditCard){
+        return adminService.createCreditCard(creditCard);
     }
 }

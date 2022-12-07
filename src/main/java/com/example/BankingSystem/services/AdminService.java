@@ -2,10 +2,7 @@ package com.example.BankingSystem.services;
 
 import com.example.BankingSystem.DTOs.CheckingDTO;
 import com.example.BankingSystem.DTOs.UpdateBalanceDTO;
-import com.example.BankingSystem.models.Account.Account;
-import com.example.BankingSystem.models.Account.Checking;
-import com.example.BankingSystem.models.Account.Savings;
-import com.example.BankingSystem.models.Account.StudentChecking;
+import com.example.BankingSystem.models.Account.*;
 import com.example.BankingSystem.models.User.AccountHolder;
 import com.example.BankingSystem.models.User.Admin;
 import com.example.BankingSystem.repositories.*;
@@ -23,14 +20,14 @@ public class AdminService {
 
     @Autowired
     AccountHolderRepository accountHolderRepository;
-
     @Autowired
     SavingsRepository savingsRepository;
-
     @Autowired
     AccountRepository accountRepository;
     @Autowired
-    private AdminRepository adminRepository;
+    AdminRepository adminRepository;
+    @Autowired
+    CreditCardRepository creditCardRepository;
 
 
     public Account createCheckingAccount(CheckingDTO checkingDTO){
@@ -73,4 +70,9 @@ public class AdminService {
         account.setBalance(newBalance);
         return accountRepository.save(account);
     }
-}
+
+    public CreditCard createCreditCard(CreditCard creditCard){
+
+        return creditCardRepository.save(creditCard);
+    }
+}}
