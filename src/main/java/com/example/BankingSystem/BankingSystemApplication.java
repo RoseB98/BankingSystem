@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -29,6 +30,16 @@ public class BankingSystemApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+		BigDecimal a = new BigDecimal(3);
+		BigDecimal b = new BigDecimal(2);
+		int resultado = a.compareTo(b);
+		System.out.println("--------------------------");
+		System.out.println("--------------------------");
+		System.out.println(resultado);
+		if(a.compareTo(b) < 0) System.out.println("a es mas pequeñö");
+		else if(a.compareTo(b) > 0) System.out.println("b es mas pequeñö");
+		else System.out.println("los numeros son iguals");
 
 
 

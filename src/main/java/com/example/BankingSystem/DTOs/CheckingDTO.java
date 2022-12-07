@@ -1,27 +1,22 @@
-package com.example.BankingSystem.models;
-
-
-import com.example.BankingSystem.models.Account.Status;
-import com.example.BankingSystem.models.User.AccountHolder;
+package com.example.BankingSystem.DTOs;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
-public class CheckingDTO {
+public  class CheckingDTO {
 
     private BigDecimal balance;
     private Long primaryOwnerId;
     private Long secondaryOwnerId;
     private String secretKey;
 
-    public CheckingDTO() {
-    }
+
 
     public CheckingDTO(BigDecimal balance, Long primaryOwnerId, Long secondaryOwnerId, String secretKey) {
         this.balance = balance;
         this.primaryOwnerId = primaryOwnerId;
         this.secondaryOwnerId = secondaryOwnerId;
         this.secretKey = secretKey;
+
     }
 
     public BigDecimal getBalance() {
@@ -55,4 +50,6 @@ public class CheckingDTO {
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
     }
+
+
 }
