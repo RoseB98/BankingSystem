@@ -16,7 +16,7 @@ public class CreditCard extends Account {
     @Min(value = 100)
     @Max(value = 100000)
     private BigDecimal creditLimit = new BigDecimal(100);
-    @DecimalMax("0.2")
+    @DecimalMax("0.21")
     @DecimalMin("0.1")
     private BigDecimal interestRate = new BigDecimal(0.2);
 

@@ -25,6 +25,13 @@ public class Savings extends Account {
         this.secretKey = secretKey;
     }
 
+    public void balanceDropsTheMinimum(){
+        Savings savingsAccount = null;
+        if(savingsAccount.getBalance().compareTo(savingsAccount.getMinimunBalance()) < 0){
+            savingsAccount.setBalance(savingsAccount.getBalance().subtract(getPenaltyFee()));
+        }
+    }
+
     public BigDecimal getInterestRate() {
         return interestRate;
     }

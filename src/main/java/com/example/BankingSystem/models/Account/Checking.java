@@ -21,6 +21,13 @@ public class Checking extends Account {
         this.secretKey = secretKey;
     }
 
+    public void balanceDropsTheMinimum(){
+        Checking checkingAccount = null;
+        if(checkingAccount.getBalance().compareTo(checkingAccount.getMinimumBalance()) < 0){
+             checkingAccount.setBalance(checkingAccount.getBalance().subtract(getPenaltyFee()));
+        }
+    }
+
     public BigDecimal getMinimumBalance() {
         return minimumBalance;
     }

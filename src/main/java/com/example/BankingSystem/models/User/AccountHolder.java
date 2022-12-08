@@ -4,6 +4,7 @@ import com.example.BankingSystem.models.Account.Account;
 import com.example.BankingSystem.models.User.Address;
 import com.example.BankingSystem.models.User.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -36,6 +37,7 @@ public class AccountHolder extends User {
 
 
     @OneToMany(mappedBy = "primaryOwner")
+    @JsonIgnore
     private List<Account> accountList = new ArrayList<>();
 
     // crear las listas de ACcounts para cerrar las relaciones (@Onetomany)

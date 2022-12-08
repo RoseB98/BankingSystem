@@ -6,9 +6,6 @@ public class UpdateBalanceDTO {
     private BigDecimal newBalance;
     private Long accountId;
 
-    public UpdateBalanceDTO() {
-    }
-
     public UpdateBalanceDTO(BigDecimal newBalance, Long accountId) {
         this.newBalance = newBalance;
         this.accountId = accountId;

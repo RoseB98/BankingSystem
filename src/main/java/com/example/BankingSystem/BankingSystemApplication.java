@@ -31,7 +31,7 @@ public class BankingSystemApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		BigDecimal a = new BigDecimal(3);
+		/*BigDecimal a = new BigDecimal(1);
 		BigDecimal b = new BigDecimal(2);
 		int resultado = a.compareTo(b);
 		System.out.println("--------------------------");
@@ -52,6 +52,6 @@ public class BankingSystemApplication implements CommandLineRunner {
 
 		User accountHolder1 = new AccountHolder("Pablito", "pablito@gmail.com", "12345", date1, address1, mailingAddress1);
 		User accountHolder2 = new AccountHolder("Darci", "darci@gamil.com", "54321", LocalDate.of(1979, 03, 19), address2, mailingAddress2);
-		userRepository.saveAll(List.of(accountHolder1, accountHolder2));
+		userRepository.saveAll(List.of(accountHolder1, accountHolder2));*/
 	}
 }
