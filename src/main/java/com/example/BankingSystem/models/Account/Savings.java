@@ -7,6 +7,7 @@ import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.Min;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 public class Savings extends Account {
@@ -16,6 +17,7 @@ public class Savings extends Account {
     @Min(value = 100)
     private BigDecimal minimunBalance = new BigDecimal(1000);
     private Status status = Status.ACTIVE;
+    private LocalDate lastInterestAdded = LocalDate.now();
 
     public Savings() {
     }
@@ -62,5 +64,13 @@ public class Savings extends Account {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public LocalDate getLastInterestAdded() {
+        return lastInterestAdded;
+    }
+
+    public void setLastInterestAdded(LocalDate lastInterestAdded) {
+        this.lastInterestAdded = lastInterestAdded;
     }
 }

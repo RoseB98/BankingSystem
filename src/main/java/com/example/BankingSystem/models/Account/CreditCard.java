@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 public class CreditCard extends Account {
@@ -19,6 +20,8 @@ public class CreditCard extends Account {
     @DecimalMax("0.21")
     @DecimalMin("0.1")
     private BigDecimal interestRate = new BigDecimal(0.2);
+
+    private LocalDate lastInterestAdded = LocalDate.now();
 
     public CreditCard() {
     }
@@ -41,5 +44,13 @@ public class CreditCard extends Account {
 
     public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
+    }
+
+    public LocalDate getLastInterestAdded() {
+        return lastInterestAdded;
+    }
+
+    public void setLastInterestAdded(LocalDate lastInterestAdded) {
+        this.lastInterestAdded = lastInterestAdded;
     }
 }

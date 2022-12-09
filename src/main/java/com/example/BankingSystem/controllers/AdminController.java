@@ -37,26 +37,6 @@ public class AdminController {
         return adminService.createAdmin(admin);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @PostMapping("/create-checking-account")
     @ResponseStatus(HttpStatus.CREATED)
     public Account addCheckingAccount(@RequestBody CheckingDTO checkingDTO){
