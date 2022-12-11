@@ -7,6 +7,7 @@ import com.example.BankingSystem.DTOs.UpdateStatusDTO;
 import com.example.BankingSystem.models.Account.*;
 import com.example.BankingSystem.models.User.AccountHolder;
 import com.example.BankingSystem.models.User.Admin;
+import com.example.BankingSystem.models.User.ThirdParty;
 import com.example.BankingSystem.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,8 @@ public class AdminService {
     CheckingRepository checkingRepository;
     @Autowired
     StudentCheckingRepository studentCheckingRepository;
+    @Autowired
+    ThirdPartyRepository thirdPartyRepository;
 
 
     public Account createCheckingAccount(CheckingDTO checkingDTO) {
@@ -79,6 +82,10 @@ public class AdminService {
         CreditCard creditCard = new CreditCard(savingAndCreditCardDTO.getBalance(), primaryOwner, secondaryOwner);
 
         return creditCardRepository.save(creditCard);
+    }
+
+    public ThirdParty createThirdParty(ThirdParty thirdParty){
+        return thirdPartyRepository.save(thirdParty);
     }
 
     public AccountHolder createAccountHolder(AccountHolder accountHolder) {

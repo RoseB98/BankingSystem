@@ -3,12 +3,12 @@ package com.example.BankingSystem.services;
 import com.example.BankingSystem.models.Account.Account;
 import com.example.BankingSystem.models.Account.CreditCard;
 import com.example.BankingSystem.models.Account.Savings;
-import com.example.BankingSystem.repositories.AccountHolderRepository;
-import com.example.BankingSystem.repositories.AccountRepository;
-import com.example.BankingSystem.repositories.CreditCardRepository;
-import com.example.BankingSystem.repositories.SavingsRepository;
+import com.example.BankingSystem.models.Account.Transfer;
+import com.example.BankingSystem.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,6 +23,9 @@ public class AccountHolderService {
     AccountRepository accountRepository;
     @Autowired
     SavingsRepository savingsRepository;
+
+    @Autowired
+    TransferRepository transferRepository;
 
 
     //llamar al metodo de los intereses dentro del metodo showbalance(comprobando qie el id de la cuenta sea de savings) y si es savings(con instance of) llamarlo
@@ -66,6 +69,24 @@ public class AccountHolderService {
         } else {
             return accountRepository.findById(id).get().getBalance();
         }
+    }
+
+    public Transfer transferMoney(Transfer transfer){
+        Account sendingAccount = accountRepository.findById(transfer.getSendingAccountId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "the user does not exist"));
+        Account receivingAccount = accountRepository.findById(transfer.getReceivingAccountId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "the user does not exist"));
+
+        if(sendingAccount.getBalance().compareTo(transfer.getTransferAmount()) > 0)throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Balance is not enough");
+
+        if(transfer.getRecipientName().equals(receivingAccount.getPrimaryOwner().getName()) ||
+                transfer.getRecipientName().equals(receivingAccount.getSecondaryOwner().getName())){
+            sendingAccount.setBalance(sendingAccount.getBalance().subtract(transfer.getTransferAmount()));
+            receivingAccount.setBalance(receivingAccount.getBalance().add(transfer.getTransferAmount()));
+            accountRepository.save(sendingAccount);
+            accountRepository.save(receivingAccount);
+            return transferRepository.save(transfer);
+        }
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The name of the recipient does not match");
+
     }
 
 }

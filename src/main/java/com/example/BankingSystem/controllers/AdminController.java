@@ -7,34 +7,65 @@ import com.example.BankingSystem.DTOs.UpdateStatusDTO;
 import com.example.BankingSystem.models.Account.*;
 import com.example.BankingSystem.models.User.AccountHolder;
 import com.example.BankingSystem.models.User.Admin;
+import com.example.BankingSystem.models.User.Role;
+import com.example.BankingSystem.models.User.ThirdParty;
+import com.example.BankingSystem.repositories.AccountRepository;
 import com.example.BankingSystem.repositories.CheckingRepository;
+import com.example.BankingSystem.repositories.RoleRepository;
 import com.example.BankingSystem.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/admin-area")
 public class AdminController {
 
     @Autowired
     CheckingRepository checkingRepository;
     @Autowired
     AdminService adminService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    RoleRepository roleRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
     @PostMapping("/create-account-holder")
     @ResponseStatus(HttpStatus.CREATED)
     public AccountHolder addAccountHolder(@RequestBody AccountHolder accountHolder){
 
-        return adminService.createAccountHolder(accountHolder);
+        String encodedPassword = passwordEncoder.encode(accountHolder.getPassword());
+        accountHolder.setPassword(encodedPassword);
+        AccountHolder accountHolder1 = adminService.createAccountHolder(accountHolder);
+        Role role = roleRepository.save(new Role("ACCOUNT-HOLDER", accountHolder));
+        return accountHolder1;
     }
 
     @PostMapping("/create-admin")
     @ResponseStatus(HttpStatus.CREATED)
     public Admin addAdmin(@RequestBody Admin admin){
 
-        return adminService.createAdmin(admin);
+        String encodedPassword = passwordEncoder.encode(admin.getPassword());
+        admin.setPassword(encodedPassword);
+        Admin admin1 = adminService.createAdmin(admin);
+        Role role = roleRepository.save(new Role("ADMIN", admin));
+        return admin1;
+    }
+
+    @PostMapping("/create-third-party")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ThirdParty addThirdParty (@RequestBody ThirdParty thirdParty){
+
+        String hashedKey = passwordEncoder.encode(thirdParty.getHashedKey());
+        thirdParty.setHashedKey(hashedKey);
+        ThirdParty thirdParty1 = adminService.createThirdParty(thirdParty);
+        Role role = roleRepository.save(new Role("THIRD-PARTY", thirdParty));
+        return  thirdParty1;
     }
 
     @PostMapping("/create-checking-account")

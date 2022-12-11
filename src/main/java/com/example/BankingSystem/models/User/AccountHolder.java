@@ -14,6 +14,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -45,11 +46,13 @@ public class AccountHolder extends User {
     public AccountHolder() {
     }
 
-    public AccountHolder(String name, String email, String password, LocalDate dateOfBirth, Address primaryAddress, Address mailingAddress) {
-        super(name, email, password);
+    public AccountHolder(String name, String password, LocalDate dateOfBirth,
+                         Address primaryAddress, Address mailingAddress) {
+        super(name, password);
         this.dateOfBirth = dateOfBirth;
         this.primaryAddress = primaryAddress;
         this.mailingAddress = mailingAddress;
+
     }
 
     public LocalDate getDateOfBirth() {
@@ -74,6 +77,14 @@ public class AccountHolder extends User {
 
     public void setMailingAddress(Address mailingAddress) {
         this.mailingAddress = mailingAddress;
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
     }
 
     @Override
