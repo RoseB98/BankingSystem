@@ -14,11 +14,13 @@ public class ThirdPartyDTO {
     private Long sendingAccountId;
     private Long receivingAccountId;
     private BigDecimal sendingAmount;
+    private String secretKey;
 
-    public ThirdPartyDTO(Long sendingAccountId, Long receivingAccountId, BigDecimal sendingAmount) {
+    public ThirdPartyDTO(Long sendingAccountId, Long receivingAccountId, BigDecimal sendingAmount, String secretKey) {
         this.sendingAccountId = sendingAccountId;
         this.receivingAccountId = receivingAccountId;
         this.sendingAmount = sendingAmount;
+        this.secretKey = secretKey;
     }
 
     public Long getId() {
@@ -51,5 +53,13 @@ public class ThirdPartyDTO {
 
     public void setSendingAmount(BigDecimal sendingAmount) {
         this.sendingAmount = sendingAmount;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 }

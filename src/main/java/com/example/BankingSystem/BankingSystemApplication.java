@@ -3,12 +3,14 @@ package com.example.BankingSystem;
 import com.example.BankingSystem.models.Account.CreditCard;
 import com.example.BankingSystem.models.User.*;
 import com.example.BankingSystem.repositories.AccountHolderRepository;
+import com.example.BankingSystem.repositories.AdminRepository;
 import com.example.BankingSystem.repositories.RoleRepository;
 import com.example.BankingSystem.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -24,6 +26,10 @@ public class BankingSystemApplication implements CommandLineRunner {
     UserRepository userRepository;
     @Autowired
 	RoleRepository roleRepository;
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	@Autowired
+	AdminRepository adminRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(BankingSystemApplication.class, args);
 	}
@@ -50,8 +56,11 @@ public class BankingSystemApplication implements CommandLineRunner {
 		Address mailingAddress2 = new Address("Delta", "1-15",null, PlaceType.HOUSE, "Barquisimeto", "9103");
 
 
-		User accountHolder1 = new AccountHolder("Pablito", "12345", date1, address1, mailingAddress1);
-		User accountHolder2 = new AccountHolder("Darci", "54321", LocalDate.of(1979, 03, 19), address2, mailingAddress2);
+		User accountHolder1 = new AccountHolder("Pablito", passwordEncoder.encode("1234"), date1, address1, mailingAddress1);
+		User accountHolder2 = new AccountHolder("Darci", passwordEncoder.encode("1234"), LocalDate.of(1979, 03, 19), address2, mailingAddress2);
+		Admin admin1 = new Admin("Luis", passwordEncoder.encode("1234"));
+		adminRepository.save(admin1);
+
 		userRepository.saveAll(List.of(accountHolder1, accountHolder2));
 
 		roleRepository.save(new Role("ACCOUNT-HOLDER", accountHolder1));

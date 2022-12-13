@@ -28,7 +28,8 @@ public class SecurityConfiguration {
         httpSecurity.httpBasic();
 
         httpSecurity.authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/user-area**").hasRole("ACCOUNT-HOLDER")
+                .requestMatchers(HttpMethod.GET, "/user-area/**").hasRole("ACCOUNT-HOLDER")
+                //.requestMatchers(HttpMethod.GET, "/third-party-area**").hasRole("THIRD-PARTY")
                 .requestMatchers(HttpMethod.GET, "/admin-area**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/user-details").hasAnyRole("ADMIN", "USER")
                 .anyRequest().permitAll();

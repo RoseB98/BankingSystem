@@ -28,11 +28,6 @@ public class AccountHolderService {
     TransferRepository transferRepository;
 
 
-    //llamar al metodo de los intereses dentro del metodo showbalance(comprobando qie el id de la cuenta sea de savings) y si es savings(con instance of) llamarlo
-    //crear variable de la ultima vez que se aplico el interes
-    //editar lo del 365
-    //lo que va dentro del multiply
-
     public BigDecimal addInterestSavnigs(Long id){
         Savings account = savingsRepository.findById(id).get();
 
